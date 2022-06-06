@@ -1,6 +1,6 @@
 @extends('layouts.dashboard-admin')
 
-@section('title', 'Halaman Tambah Site')
+@section('title', 'Halaman Edit Blog')
 
 @section('content')
     <div class="content-wrapper">
@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Tambah Site</h1>
+                        <h1>Edit Blog</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Site</li>
+                            <li class="breadcrumb-item active">Blog</li>
                         </ol>
                     </div>
                 </div>
@@ -30,26 +30,27 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Form Tambah Data Site</h3>
+                                <h3 class="card-title">Form Edit Data Blog</h3>
                             </div>
                             <!-- /.card-header -->
-                            <form method="POST" action="{{ route('admin.site.store') }}" enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.blog.update', $item->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Nama Site</label>
+                                        <label for="exampleInputEmail1">Nama Blog</label>
                                         <input type="text" class="form-control"
-                                            value="{{ old('nama_site') }}" name="nama_site" placeholder="Nama Site" required>
+                                            value="{{ $item->nama_blog }}" name="nama_blog" placeholder="Nama Blog" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Harga</label>
-                                        <input type="number" class="form-control"
-                                            value="{{ old('harga') }}" name="harga" placeholder="Harga" required>
+                                        <label for="exampleInputEmail1">Gambar</label>
+                                        <input type="file" class="form-control"
+                                            name="gambar" >
+                                        <img src="{{ url($item->gambar ?? '') }}" class="mt-2" style="width: 100px">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Isi Site</label>
+                                        <label for="exampleInputEmail1">Isi Blog</label>
                                         <textarea name="isi" class="form-control" id="editor"
-                                            value="" placeholder="Isi Site">{{ old('isi') }}</textarea>
+                                            placeholder="Isi Blog">{{ $item->isi }}</textarea>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->

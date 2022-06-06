@@ -12,7 +12,9 @@
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('assets/gunung-slamet.png') }}">
 
     <!-- CSS here -->
+    @stack('up-style')
     @include('includes.frontend.style')
+    @stack('down-style')
 </head>
 
 <body>

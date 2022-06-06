@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Site;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,12 +15,19 @@ class SiteController extends Controller
         return view('Admin.site.index', compact('data'));
     }
 
+    public function create()
+    {
+        return view('Admin.site.create');
+    }
+
     public function store(Request $request)
     {
         $data = new Site();
 
         $data->nama_site = $request->nama_site;
         $data->harga = $request->harga;
+        $data->slug = Str::slug($request->nama_site);
+        $data->isi = $request->isi;
 
         $data->save();
 
@@ -30,12 +38,21 @@ class SiteController extends Controller
         }
     }
 
+    public function edit($id)
+    {
+        $item = Site::findOrFail($id);
+        return view('Admin.site.edit', compact('item'));
+    }
+
+
     public function update(Request $request, $id)
     {
         $data = Site::findOrFail($id);
 
         $data->nama_site = $request->nama_site;
         $data->harga = $request->harga;
+        $data->slug = Str::slug($request->nama_site);
+        $data->isi = $request->isi;
 
         $data->save();
 

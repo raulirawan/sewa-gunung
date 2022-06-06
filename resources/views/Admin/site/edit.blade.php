@@ -1,6 +1,6 @@
 @extends('layouts.dashboard-admin')
 
-@section('title', 'Halaman Edit User')
+@section('title', 'Halaman Edit Site')
 
 @section('content')
     <div class="content-wrapper">
@@ -9,12 +9,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Edit User</h1>
+                        <h1>Edit Site</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">User</li>
+                            <li class="breadcrumb-item active">Site</li>
                         </ol>
                     </div>
                 </div>
@@ -30,56 +30,49 @@
 
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Form Edit Data User</h3>
+                                <h3 class="card-title">Form Edit Data Site</h3>
                             </div>
                             <!-- /.card-header -->
-                            <form method="POST" action="{{ route('admin.kuota-gunung.update', $data->id) }}"
-                                enctype="multipart/form-data">
+                            <form method="POST" action="{{ route('admin.site.update', $item->id) }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-body">
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Tanggal</label>
-                                        <input type="date" class="form-control"
-                                            value="{{ $data->tanggal }}" name="tanggal" placeholder="Nama Lengkap" required>
+                                        <label for="exampleInputEmail1">Nama Site</label>
+                                        <input type="text" class="form-control"
+                                            value="{{ $item->nama_site }}" name="nama_site" placeholder="Nama Site" required>
                                     </div>
-
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Tanggal</label>
-                                        <select name="site_id" id="site_id" class="form-control">
-                                            <option value="">Pilih Site</option>
-                                            @foreach ($sites as $site)
-                                                <option value="{{ $site->id }}" {{ $site->id == $data->site_id ? 'selected' : '' }} >{{ $site->nama_site }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Kuota</label>
+                                        <label for="exampleInputEmail1">Harga</label>
                                         <input type="number" class="form-control"
-                                            value="{{ $data->kuota }}" name="kuota" placeholder="Kuota" required>
+                                            value="{{ $item->harga }}" name="harga" placeholder="Harga" required>
                                     </div>
-
-
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Isi Site</label>
+                                        <textarea name="isi" class="form-control" id="editor"
+                                            value="" placeholder="Isi Site">{{ $item->isi }}</textarea>
+                                    </div>
                                 </div>
-
-
+                                <!-- /.card-body -->
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-primary">Simpan</button>
                                 </div>
+                            </form>
+
                         </div>
-                        <!-- /.card-body -->
-
-                        </form>
-
+                        <!-- /.card -->
                     </div>
-                    <!-- /.card -->
+                    <!-- /.col -->
                 </div>
-                <!-- /.col -->
+                <!-- /.row -->
             </div>
-            <!-- /.row -->
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
     </div>
-    <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-    </div>
+    @push('down-script')
+    <script src="https://cdn.ckeditor.com/4.19.0/standard/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace( 'isi' );
+</script>
+    @endpush
 @endsection

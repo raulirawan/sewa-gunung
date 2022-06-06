@@ -89,7 +89,7 @@
                 <div class="text-center">
                     {!! QrCode::size(200)->generate($transaction->kode_booking) !!} <br>
                 <span style="font-size: 20px; font-weight: bold">
-                    Kunir
+                    {{ $transaction->site->nama_site }}
                 </span>
                 </div>
             </div>

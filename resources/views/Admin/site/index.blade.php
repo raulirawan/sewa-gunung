@@ -43,10 +43,9 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <button type="button" class="btn btn-primary" data-toggle="modal"
-                                    data-target="#exampleModal">
+                                <a href="{{ route('admin.site.create') }}" class="btn btn-primary">
                                     (+) Tambah Site
-                                </button>
+                                </a>
 
                                 <table id="example1" class="table table-bordered table-striped">
                                     <thead>
@@ -66,12 +65,8 @@
                                                 <td>{{ $item->nama_site }}</td>
                                                 <td>Rp{{ number_format($item->harga) }}</td>
                                                 <td>
-                                                    <button type="button" id="edit" data-toggle="modal"
-                                                        data-target="#modal-edit"
-                                                        data-id="{{ $item->id }}"
-                                                        data-nama_site="{{ $item->nama_site }}"
-                                                        data-harga="{{ $item->harga }}"
-                                                        class="btn btn-sm btn-primary" style='float: left;'>Edit</button>
+                                                    <a href="{{ route('admin.site.edit', $item->id) }}"
+                                                        class="btn btn-sm btn-primary" style='float: left;'>Edit</a>
                                                     <form action="{{ route('admin.site.delete', $item->id) }}"
                                                         method="POST" style='float: left; padding-left: 5px;'>
                                                         @csrf

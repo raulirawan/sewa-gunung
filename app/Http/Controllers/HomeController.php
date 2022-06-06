@@ -37,4 +37,9 @@ class HomeController extends Controller
         $jumlah_anggota = count($anggota) + 1;
         return view('check-status-booking', compact('transaction','jumlah_anggota'));
     }
+
+    public function tataCaraPembayaran()
+    {
+        return view('cara-pembayaran');
+    }
 }

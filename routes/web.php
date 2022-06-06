@@ -20,6 +20,11 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/site/rute/{slug}','SiteController@detail')->name('rute.detail');
+Route::get('/blog/{slug}','BlogController@detail')->name('blog.detail');
+Route::get('/cara-pembayaran','HomeController@tataCaraPembayaran')->name('tata.pembayaran.index');
+
+
 Route::get('/booking','BookingController@index')->name('booking.index');
 Route::post('/booking','BookingController@kuota')->name('booking.kuota');
 
@@ -32,8 +37,19 @@ Route::post('/booking/form','BookingController@formBookPost')->name('booking.for
 Route::prefix('admin')->middleware(['auth','admin'])->group(function () {
     Route::get('dashboard','Admin\DashboardController@index')->name('admin.dashboard.index');
 
+    // Blog
+Route::get('blog','Admin\BlogController@index')->name('admin.blog.index');
+    Route::get('blog/create','Admin\BlogController@create')->name('admin.blog.create');
+    Route::get('blog/edit/{id}','Admin\BlogController@edit')->name('admin.blog.edit');
+    Route::post('blog/store','Admin\BlogController@store')->name('admin.blog.store');
+    Route::post('blog/update/{id}','Admin\BlogController@update')->name('admin.blog.update');
+    Route::post('blog/delete/{id}','Admin\BlogController@delete')->name('admin.blog.delete');
+
+
     // Site
     Route::get('site','Admin\SiteController@index')->name('admin.site.index');
+    Route::get('site/create','Admin\SiteController@create')->name('admin.site.create');
+    Route::get('site/edit/{id}','Admin\SiteController@edit')->name('admin.site.edit');
     Route::post('site/store','Admin\SiteController@store')->name('admin.site.store');
     Route::post('site/update/{id}','Admin\SiteController@update')->name('admin.site.update');
     Route::post('site/delete/{id}','Admin\SiteController@delete')->name('admin.site.delete');

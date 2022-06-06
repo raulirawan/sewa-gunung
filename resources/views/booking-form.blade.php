@@ -623,11 +623,6 @@
                         }).get()];
                     }).get();
 
-                    if(data_anggota_kelompok.length == 0){
-                        alert('Data Anggota Kelompok Tidak Boleh Kosong');
-                        return false;
-                    }
-
                     var tanggal_kunjungan = dateFormatter.format(start);
                     var tanggal_pulang = dateFormatter.format(end);
                     if(start.getTime() === end.getTime()) {
