@@ -14,7 +14,7 @@ class QrCodeController extends Controller
         if (request()->ajax()) {
 
             $query  = Transaction::query();
-            $query->where('status','disetujui')->orWhere('status','naik');
+            $query->where('status','disetujui')->orWhere('status','naik')->orWhere('status','turun');
             return DataTables::of($query)
                 ->editColumn('status', function ($item) {
                     if($item->status == 'disetujui'){
@@ -23,6 +23,8 @@ class QrCodeController extends Controller
                         return '<span class="badge badge-warning">PENDING</span>';
                     } elseif($item->status == 'naik') {
                         return '<span class="badge badge-success">NAIK</span>';
+                    }elseif($item->status == 'turun') {
+                        return '<span class="badge badge-danger">PENDAKIAN SELESAI</span>';
                     }
                     else {
                         return '<span class="badge badge-danger">DIBATALKAN</span>';
@@ -46,6 +48,16 @@ class QrCodeController extends Controller
         $data = Transaction::where('kode_booking', $request->kode_booking)->first();
 
         $data->status = 'naik';
+        $data->save();
+
+        return redirect()->route('scan.index')->with('success','Data Berhasil di Update');
+    }
+
+    public function updateTurun(Request $request)
+    {
+        $data = Transaction::where('kode_booking', $request->kode_booking)->first();
+
+        $data->status = 'turun';
         $data->save();
 
         return redirect()->route('scan.index')->with('success','Data Berhasil di Update');

@@ -23,6 +23,7 @@ Route::get('/', function () {
 Route::get('/site/rute/{slug}','SiteController@detail')->name('rute.detail');
 Route::get('/blog/{slug}','BlogController@detail')->name('blog.detail');
 Route::get('/cara-pembayaran','HomeController@tataCaraPembayaran')->name('tata.pembayaran.index');
+Route::get('/sop','HomeController@sop')->name('sop.index');
 
 
 Route::get('/booking','BookingController@index')->name('booking.index');
@@ -45,6 +46,8 @@ Route::get('blog','Admin\BlogController@index')->name('admin.blog.index');
     Route::post('blog/update/{id}','Admin\BlogController@update')->name('admin.blog.update');
     Route::post('blog/delete/{id}','Admin\BlogController@delete')->name('admin.blog.delete');
 
+    Route::get('sop','Admin\SOPController@index')->name('admin.sop.index');
+    Route::post('sop/update','Admin\SOPController@update')->name('admin.sop.update');
 
     // Site
     Route::get('site','Admin\SiteController@index')->name('admin.site.index');
@@ -70,6 +73,7 @@ Route::get('blog','Admin\BlogController@index')->name('admin.blog.index');
 
     Route::get('scan/qr-code','Admin\QrCodeController@index')->name('scan.index');
     Route::post('scan/qr-code','Admin\QrCodeController@update')->name('scan.update');
+    Route::post('scan/qr-code/turun','Admin\QrCodeController@updateTurun')->name('scan.update.turun');
 
 
 

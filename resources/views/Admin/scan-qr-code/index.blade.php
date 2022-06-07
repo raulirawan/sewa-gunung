@@ -47,7 +47,7 @@
                             <div class="row input-daterange ml-2 mt-2">
                                 <div class="col-md-4">
                                     <input type="text" name="kode_booking" id="kode_booking" class="form-control"
-                                        placeholder="Masukan Kode Booking" required />
+                                        placeholder="Masukan Kode Booking (SCAN NAIK)" required />
                                 </div>
                                 <div class="col-md-4">
                                     <button type="submit"  class="btn btn-primary">Update</button>
@@ -55,6 +55,19 @@
 
                             </div>
                            </form>
+                           <form action="{{ route('scan.update.turun') }}" method="POST">
+                            @csrf
+                         <div class="row input-daterange ml-2 mt-2">
+                             <div class="col-md-4">
+                                 <input type="text" name="kode_booking" id="kode_booking" class="form-control"
+                                     placeholder="Masukan Kode Booking (SCAN TURUN)" required />
+                             </div>
+                             <div class="col-md-4">
+                                 <button type="submit"  class="btn btn-primary">Update</button>
+                             </div>
+
+                         </div>
+                        </form>
                             <!-- /.card-header -->
                             <div class="card-body table-responsive">
 

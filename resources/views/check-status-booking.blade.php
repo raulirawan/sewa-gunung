@@ -26,6 +26,8 @@
                         <span class="badge bg-warning">Pending</span>
                         @elseif($transaction->status == 'naik')
                         <span class="badge bg-success">Naik</span>
+                        @elseif($transaction->status == 'turun')
+                        <span class="badge bg-danger">Pendakian Selesai</span>
                         @else
                         <span class="badge bg-danger">Di Batalkan</span>
                         @endif

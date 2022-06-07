@@ -15,6 +15,8 @@
                                            @endforeach
                                         </ul>
                                     </li>
+                                    <li><a href="{{ route('sop.index') }}">SOP</a></li>
+
                                     <li><a href="{{ route('tata.pembayaran.index') }}">Cara Pembayaran</a></li>
                                 </ul>
                             </nav>

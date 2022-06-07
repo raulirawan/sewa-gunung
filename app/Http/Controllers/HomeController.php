@@ -42,4 +42,10 @@ class HomeController extends Controller
     {
         return view('cara-pembayaran');
     }
+
+    public function sop()
+    {
+
+        return view('sop');
+    }
 }

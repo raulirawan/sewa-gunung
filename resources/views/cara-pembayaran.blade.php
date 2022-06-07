@@ -83,7 +83,7 @@
                              <img src="https://snipboard.io/O5ZbJC.jpg" style="width: 90%; margin-bottom: 40px;"><br>
                                      <hr>
                          <li>Lengkapi Data Jumlah Anggota </li><br>
-                             <img src="https://snipboard.io/eIROnb.jpg" style="width: 90%; margin-bottom: 40px;"><br>
+                             <img src="https://snipboard.io/qwHUMQ.jpg" style="width: 90%; margin-bottom: 40px;"><br>
                                      <hr>
                          <li>Melakukan Pembayaran Menggunakan BCA, BNI, BRI, Permata Virtual Account, GOPAY,</li><br>
                           <img src="https://snipboard.io/osdmwc.jpg" style="width: 90%; margin-bottom: 40px;"><br>

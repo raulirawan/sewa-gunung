@@ -128,6 +128,8 @@
                                     <th scope="col">Nama Anggota</th>
                                     <th scope="col">Tanggal Lahir</th>
                                     <th scope="col">Jenis Kelamin</th>
+                                    <th scope="col">Jenis Identitas</th>
+                                    <th scope="col">Nomor Kartu</th>
                                     <th scope="col">Alamat</th>
                                     <th scope="col">Nomor Telepon</th>
                                     <th scope="col">Aksi</th>
@@ -213,6 +215,25 @@
                                 </div>
                             </div>
                             <div class="col-xl-12">
+                                <label for="" class="float-left">Jenis Identitas</label>
+                                <div class="form-group">
+                                    <select name="jenis_identitas" class="form-select wide mb-3" id="jenis_identitas">
+                                        <option value="">Jenis Identitas</option>
+                                        <option value="KTP">KTP</option>
+                                        <option value="SIM">SIM</option>
+                                        <option value="KTM">KTM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <label for=""class="float-left">Nomor Kartu Identitas</label>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="nomor_kartu"
+                                        placeholder="Nomor Kartu Identitas">
+                                </div>
+                            </div>
+
+                            <div class="col-xl-12">
                                 <label for="" class="float-left">Jenis Kelamin</label>
                                 <div class="form-group">
                                     <select class="form-select wide mb-3" id="jenis_kelamin" required>
@@ -270,6 +291,24 @@
                                         <option value="L">Laki - Laki</option>
                                         <option value="P">Perempuan</option>
                                     </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <label for="" class="float-left">Jenis Identitas</label>
+                                <div class="form-group">
+                                    <select name="jenis_identitas" class="form-select wide mb-3" id="jenis_identitas">
+                                        <option value="">Jenis Identitas</option>
+                                        <option value="KTP">KTP</option>
+                                        <option value="SIM">SIM</option>
+                                        <option value="KTM">KTM</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xl-12">
+                                <label for=""class="float-left">Nomor Kartu Identitas</label>
+                                <div class="form-group">
+                                    <input type="number" class="form-control" id="nomor_kartu"
+                                        placeholder="Nomor Kartu Identitas">
                                 </div>
                             </div>
                             <div class="col-xl-12">
@@ -382,6 +421,8 @@
                 var jenis_kelamin = $("#jenis_kelamin").val();
                 var alamat_rumah = $("#alamat_rumah").val();
                 var nomor_telepon = $("#nomor_telepon").val();
+                var jenis_identitas = $("#jenis_identitas").val();
+                var nomor_kartu = $("#nomor_kartu").val();
 
                 if(nama_anggota.length == 0){
                     alert('Nama Tidak Boleh Kosong');
@@ -405,10 +446,20 @@
                     return false;
                 }
 
+                if(jenis_identitas.length == 0){
+                    alert('Telepon Tidak Boleh Kosong');
+                    return false;
+                }
+
+                if(nomor_kartu.length == 0){
+                    alert('Telepon Tidak Boleh Kosong');
+                    return false;
+                }
 
 
 
-                var tr = '<tr id="tr"> <td>'+nama_anggota+'</td> <td>'+tanggal_lahir+'</td> <td>'+jenis_kelamin+'</td> <td>'+alamat_rumah+'</td> <td>'+nomor_telepon+'</td> <td><a href="#edit-form" class="btn btn-info btn-sm btn-edit popup-with-form">Edit</a> <a class="btn btn-sm btn-danger btn-delete" style="color:#fff !important;">Delete</a></td></tr>'
+
+                var tr = '<tr id="tr"> <td>'+nama_anggota+'</td> <td>'+tanggal_lahir+'</td> <td>'+jenis_kelamin+'</td> <td>'+jenis_identitas+'</td> <td>'+nomor_kartu+'</td> <td>'+alamat_rumah+'</td> <td>'+nomor_telepon+'</td> <td><a href="#edit-form" class="btn btn-info btn-sm btn-edit popup-with-form">Edit</a> <a class="btn btn-sm btn-danger btn-delete" style="color:#fff !important;">Delete</a></td></tr>'
 
                 $('#anggota_body').append(tr);
 
@@ -454,13 +505,17 @@
                 var nama_anggota = $(trEdit).find('td:eq(0)').text();
                 var tanggal_lahir = $(trEdit).find('td:eq(1)').text();
                 var jenis_kelamin = $(trEdit).find('td:eq(2)').text();
-                var alamat_rumah = $(trEdit).find('td:eq(3)').text();
-                var nomor_telepon = $(trEdit).find('td:eq(4)').text();
+                var jenis_identitas = $(trEdit).find('td:eq(3)').text();
+                var nomor_kartu = $(trEdit).find('td:eq(4)').text();
+                var alamat_rumah = $(trEdit).find('td:eq(5)').text();
+                var nomor_telepon = $(trEdit).find('td:eq(6)').text();
 
 
                 $("#nama_anggota").val(nama_anggota);
                 $("#tanggal_lahir").val(tanggal_lahir);
                 $("#jenis_kelamin").val(jenis_kelamin);
+                $("#jenis_identitas").val(jenis_identitas);
+                $("#nomor_kartu").val(nomor_kartu);
                 $("#alamat_rumah").val(alamat_rumah);
                 $("#nomor_telepon").val(nomor_telepon);
             });
@@ -470,6 +525,8 @@
                     var nama_anggota = $("#nama_anggota").val();
                     var tanggal_lahir = $("#tanggal_lahir").val();
                     var jenis_kelamin = $("#jenis_kelamin").val();
+                    var jenis_identitas = $("#jenis_identitas").val();
+                    var nomor_kartu = $("#nomor_kartu").val();
                     var alamat_rumah = $("#alamat_rumah").val();
                     var nomor_telepon = $("#nomor_telepon").val();
 
@@ -494,11 +551,22 @@
                         alert('Telepon Tidak Boleh Kosong');
                         return false;
                     }
+
+                    if(jenis_identitas.length == 0){
+                        alert('Jenis Identitas Tidak Boleh Kosong');
+                        return false;
+                    }
+                      if(nomor_kartu.length == 0){
+                        alert('Nomor Kartu Tidak Boleh Kosong');
+                        return false;
+                    }
                     $(trEdit).find('td:eq(0)').text(nama_anggota);
                     $(trEdit).find('td:eq(1)').text(tanggal_lahir);
                     $(trEdit).find('td:eq(2)').text(jenis_kelamin);
-                    $(trEdit).find('td:eq(3)').text(alamat_rumah);
-                    $(trEdit).find('td:eq(4)').text(nomor_telepon);
+                    $(trEdit).find('td:eq(3)').text(jenis_identitas);
+                    $(trEdit).find('td:eq(4)').text(nomor_kartu);
+                    $(trEdit).find('td:eq(5)').text(alamat_rumah);
+                    $(trEdit).find('td:eq(6)').text(nomor_telepon);
                     alert('Berhasil Update');
                     trEdit = null;
                 }

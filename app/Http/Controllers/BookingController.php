@@ -104,8 +104,10 @@ class BookingController extends Controller
                 'nama_anggota' => $value[0],
                 'tanggal_lahir' => $value[1],
                 'jenis_kelamin' => $value[2],
-                'alamat_rumah' => $value[3],
-                'nomor_telepon' => $value[4],
+                'jenis_identitas' => $value[3],
+                'nomor_kartu' => $value[4],
+                'alamat_rumah' => $value[5],
+                'nomor_telepon' => $value[6],
             ];
         }
 

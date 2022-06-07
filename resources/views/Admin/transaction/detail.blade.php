@@ -105,6 +105,8 @@
                                 <th>Nama Anggota</th>
                                 <th>Tanggal Lahir</th>
                                 <th>Jenis Kelamin</th>
+                                <th>Jenis Identitas</th>
+                                <th>Nomor Kartu</th>
                                 <th>Alamat Rumah</th>
                                 <th>Nomor Telepon</th>
                             </tr>
@@ -120,6 +122,8 @@
                                     <td>
                                         {{ $val->jenis_kelamin == 'L' ? 'Laki - Laki' : 'Perempuan' }}
                                     </td>
+                                    <td>{{ $val->jenis_identitas }}</td>
+                                    <td>{{ $val->nomor_kartu }}</td>
                                     <td>{{ $val->alamat_rumah }}</td>
                                     <td>{{ $val->nomor_telepon }}</td>
                                 </tr>
