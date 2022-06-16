@@ -3,6 +3,34 @@
 @section('title', 'Gunung Slamet')
 
 @section('content')
+<style>
+.lds-dual-ring {
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+  }
+  .lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 40px;
+    height: 40px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 6px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+  }
+  @keyframes lds-dual-ring {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+
+</style>
     <!-- bradcam_area_start -->
     <div class="bradcam_area breadcam_bg">
         <h3>Halaman Booking Gunung Slamet</h3>
@@ -182,8 +210,12 @@
                             Total Yang Harus Di Bayarkan :
                             <h3 id="total"></h3>
                         </div>
-                        <button class="btn btn-info mt-4 btn-block" id="btn_booking_sekarang" onclick="return('Yakin ?')">Booking
-                            Sekarang</button>
+                        <button class="btn btn-info mt-4 btn-block" id="btn_booking_sekarang" onclick="return('Yakin ?')">
+                                <div class="lds-dual-ring mb-2 d-none" id="progress"></div>
+                                <span id="text-booking" class="py-3">
+                                Booking Sekarang
+                                </span>
+                        </button>
 
                     </div>
                 </div>
@@ -703,7 +735,8 @@
 
                     e.preventDefault();
 
-
+                    $("#text-booking").addClass('d-none');
+                    $("#progress").removeClass('d-none');
                     $.ajax({
                         type: "POST",
                         url: '{!! route('booking.form.post') !!}',
@@ -729,6 +762,8 @@
                             _token: $('meta[name="csrf-token"]').attr('content'),
                         },
                         success: function (result, textStatus, jqXHR) {
+                            $("#text-booking").removeClass('d-none');
+                            $("#progress").addClass('d-none');
                             if(result.status == 'success') {
                                 alert(result.message);
                                 window.location.replace(result.url);

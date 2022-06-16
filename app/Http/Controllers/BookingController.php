@@ -26,6 +26,7 @@ class BookingController extends Controller
         $site = Site::first();
         $periods = DB::table('kuota_gunung')
         ->select(DB::raw('YEAR(tanggal) as year, MONTH(tanggal) as month, MONTHNAME(tanggal) as month_name'))
+        ->whereMonth('tanggal', Carbon::now()->month)
         ->groupBy('year')
         ->groupBy('month')
         ->orderBy('year','asc')
@@ -38,7 +39,6 @@ class BookingController extends Controller
                         ->orderBy('tanggal','asc')
                         ->where('tanggal', '>=', Carbon::today())
                         ->get();
-
         return view('booking', compact('sites','periods','kuotaGunung'));
     }
 
@@ -58,12 +58,12 @@ class BookingController extends Controller
         $sites = Site::all();
         $periods = DB::table('kuota_gunung')
         ->select(DB::raw('YEAR(tanggal) as year, MONTH(tanggal) as month, MONTHNAME(tanggal) as month_name'))
+        ->whereMonth('tanggal', Carbon::now()->month)
         ->groupBy('year')
         ->groupBy('month')
         ->orderBy('year','asc')
         ->orderBy('month','asc')
         ->get();
-
         $bulan_tahun = explode('-', $request->bulan_tahun);
 
         $bulan = $bulan_tahun[0];
@@ -98,20 +98,22 @@ class BookingController extends Controller
         $kode_booking = 'GNG-'.mt_rand(00000,99999);
         $anggota_kelompok = $request->data_anggota_kelompok;
 
-        $data_anggota = [];
-        foreach ($anggota_kelompok as $key => $value) {
-            $data_anggota [] = [
-                'nama_anggota' => $value[0],
-                'tanggal_lahir' => $value[1],
-                'jenis_kelamin' => $value[2],
-                'jenis_identitas' => $value[3],
-                'nomor_kartu' => $value[4],
-                'alamat_rumah' => $value[5],
-                'nomor_telepon' => $value[6],
-            ];
-        }
+        if($anggota_kelompok != null) {
+            $data_anggota = [];
+            foreach ($anggota_kelompok as $key => $value) {
+                $data_anggota [] = [
+                    'nama_anggota' => $value[0],
+                    'tanggal_lahir' => $value[1],
+                    'jenis_kelamin' => $value[2],
+                    'jenis_identitas' => $value[3],
+                    'nomor_kartu' => $value[4],
+                    'alamat_rumah' => $value[5],
+                    'nomor_telepon' => $value[6],
+                ];
+            }
 
-        $data_anggota = json_encode($data_anggota);
+            $data_anggota = json_encode($data_anggota);
+        }
 
         $ketua_kelompok = new KetuaKelompok();
         $ketua_kelompok->nama_ketua_kelompok = $request->nama_ketua;
@@ -134,7 +136,7 @@ class BookingController extends Controller
         $transaction->site_id = $request->site_id;
         $transaction->ketua_kelompok_id = $ketua_kelompok->id;
         $transaction->kode_booking = $kode_booking;
-        $transaction->anggota_kelompok = $data_anggota;
+        $transaction->anggota_kelompok = $data_anggota ?? NULL;
         $transaction->tanggal_berangkat = $request->tanggal_kunjungan;
         $transaction->tanggal_pulang = $request->tanggal_pulang;
         $transaction->jumlah_pengunjung = $request->orang;
