@@ -395,7 +395,7 @@
                                               >
                                                 E-TICKET
                                                 <div style="text-align: center;">
-                                                {!! QrCode::size(100)->generate($data['kode_booking']) !!}
+                                                    <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(100)->generate($data['kode_booking'])) !!}" />
                                                 </div>
                                               </div>
                                             </td>
