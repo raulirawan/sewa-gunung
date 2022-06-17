@@ -18,6 +18,8 @@
                                     <li><a href="{{ route('sop.index') }}">SOP</a></li>
 
                                     <li><a href="{{ route('tata.pembayaran.index') }}">Cara Pembayaran</a></li>
+                                    <li><a href="{{ route('booking.kuota') }}" class="d-block d-sm-none">Booking Sekarang</a></li>
+                                    <li><a class="popup-with-form d-block d-sm-none" href="#test-form">Cek Status Booking</a></li>
                                 </ul>
                             </nav>
                         </div>

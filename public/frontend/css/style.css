@@ -1612,13 +1612,24 @@ h3 {
         font-size: 30px;
     }
 }
+@media (max-width: 400px) {
+    .popup_box {
+    width: 300px;
+    }
+}
+@media (min-width: 767px) {
+    .popup_box {
+    width: 681px;
+    }
+}
 .popup_box {
     background: #fff;
     display: inline-block;
     z-index: 9;
-    width: 681px;
     padding: 60px 40px;
 }
+
+
 .popup_box h3 {
     text-align: center;
     font-size: 22px;
