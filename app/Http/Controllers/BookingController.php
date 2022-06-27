@@ -155,7 +155,9 @@ class BookingController extends Controller
                 'first_name' => $request->nama_ketua,
                 'email' => $request->email_ketua,
             ],
-
+            'callbacks' => [
+                'finish' => 'https://bookinggunungslamet.my.id/',
+            ],
             'enable_payments' => ['bca_va','permata_va','bni_va','bri_va','gopay'],
             'vtweb' => [],
         ];
