@@ -113,8 +113,9 @@
                         </thead>
                         <tbody>
                             @php
-                                $anggota = json_decode($transaction->anggota_kelompok)
+                                $anggota = json_decode($transaction->anggota_kelompok) ?? '';
                             @endphp
+                            @if(!empty($anggota))
                             @foreach ($anggota as $val)
                                 <tr>
                                     <td>{{ $val->nama_anggota}}</td>
@@ -127,7 +128,13 @@
                                     <td>{{ $val->alamat_rumah }}</td>
                                     <td>{{ $val->nomor_telepon }}</td>
                                 </tr>
+
                             @endforeach
+                            @else
+                            <tr>
+                                <td colspan="7" class="text-center">Tidak Ada Data Anggota Kelompok</td>
+                            </tr>
+                            @endif
 
                         </tbody>
                     </table>

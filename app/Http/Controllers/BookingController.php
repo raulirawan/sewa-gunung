@@ -25,21 +25,20 @@ class BookingController extends Controller
         $sites = Site::all();
         $site = Site::first();
         $periods = DB::table('kuota_gunung')
-        ->select(DB::raw('YEAR(tanggal) as year, MONTH(tanggal) as month, MONTHNAME(tanggal) as month_name'))
-        ->whereMonth('tanggal', Carbon::now()->month)
-        ->groupBy('year')
-        ->groupBy('month')
-        ->orderBy('year','asc')
-        ->orderBy('month','asc')
-        ->get();
-
+            ->select(DB::raw('YEAR(tanggal) as year, MONTH(tanggal) as month, MONTHNAME(tanggal) as month_name'))
+            ->whereMonth('tanggal', Carbon::now()->month)
+            ->groupBy('year')
+            ->groupBy('month')
+            ->orderBy('year', 'asc')
+            ->orderBy('month', 'asc')
+            ->get();
         $kuotaGunung = KuotaGunung::whereYear('tanggal', Carbon::now()->year)
-                        ->whereMonth('tanggal', Carbon::now()->month)
-                        ->where('site_id', $site->id)
-                        ->orderBy('tanggal','asc')
-                        ->where('tanggal', '>=', Carbon::today())
-                        ->get();
-        return view('booking', compact('sites','periods','kuotaGunung'));
+            ->whereMonth('tanggal', Carbon::now()->month)
+            ->where('site_id', $site->id)
+            ->orderBy('tanggal', 'asc')
+            ->where('tanggal', '>=', Carbon::today())
+            ->get();
+        return view('booking', compact('sites', 'periods', 'kuotaGunung'));
     }
 
     public function tes(Request $request)
@@ -49,7 +48,6 @@ class BookingController extends Controller
 
         $data_anggota = explode(',', $data_anggota);
         dd($data_anggota);
-
     }
 
     public function kuota(Request $request)
@@ -57,34 +55,33 @@ class BookingController extends Controller
 
         $sites = Site::all();
         $periods = DB::table('kuota_gunung')
-        ->select(DB::raw('YEAR(tanggal) as year, MONTH(tanggal) as month, MONTHNAME(tanggal) as month_name'))
-        ->whereMonth('tanggal', Carbon::now()->month)
-        ->groupBy('year')
-        ->groupBy('month')
-        ->orderBy('year','asc')
-        ->orderBy('month','asc')
-        ->get();
+            ->select(DB::raw('YEAR(tanggal) as year, MONTH(tanggal) as month, MONTHNAME(tanggal) as month_name'))
+            ->whereMonth('tanggal', Carbon::now()->month)
+            ->groupBy('year')
+            ->groupBy('month')
+            ->orderBy('year', 'asc')
+            ->orderBy('month', 'asc')
+            ->get();
         $bulan_tahun = explode('-', $request->bulan_tahun);
 
         $bulan = $bulan_tahun[0];
         $tahun = $bulan_tahun[1];
         $site_id = $request->site_id;
 
-        $kuotaGunung = KuotaGunung::
-          whereYear('tanggal', $tahun)
-        ->whereMonth('tanggal', $bulan)
-        ->where('site_id', $site_id)
-        ->where('tanggal', '>=', Carbon::today())
-        ->orderBy('tanggal','asc')
-        ->get();
+        $kuotaGunung = KuotaGunung::whereYear('tanggal', $tahun)
+            ->whereMonth('tanggal', $bulan)
+            ->where('site_id', $site_id)
+            ->where('tanggal', '>=', Carbon::today())
+            ->orderBy('tanggal', 'asc')
+            ->get();
 
-        return view('booking-kuota', compact('sites','periods','kuotaGunung','bulan','tahun','site_id'));
+        return view('booking-kuota', compact('sites', 'periods', 'kuotaGunung', 'bulan', 'tahun', 'site_id'));
     }
 
     public function formBook($site_id, $tanggal)
     {
-        $harga = Site::where('id',$site_id)->first()->harga;
-        return view('booking-form', compact('site_id','tanggal','harga'));
+        $harga = Site::where('id', $site_id)->first()->harga;
+        return view('booking-form', compact('site_id', 'tanggal', 'harga'));
     }
 
     public function formBookPost(Request $request)
@@ -95,13 +92,13 @@ class BookingController extends Controller
         Config::$isSanitized = config('services.midtrans.isSanitized');
         Config::$is3ds = config('services.midtrans.is3ds');
 
-        $kode_booking = 'GNG-'.mt_rand(00000,99999);
+        $kode_booking = 'GNG-' . mt_rand(00000, 99999);
         $anggota_kelompok = $request->data_anggota_kelompok;
 
-        if($anggota_kelompok != null) {
+        if ($anggota_kelompok != null) {
             $data_anggota = [];
             foreach ($anggota_kelompok as $key => $value) {
-                $data_anggota [] = [
+                $data_anggota[] = [
                     'nama_anggota' => $value[0],
                     'tanggal_lahir' => $value[1],
                     'jenis_kelamin' => $value[2],
@@ -158,7 +155,7 @@ class BookingController extends Controller
             'callbacks' => [
                 'finish' => 'https://bookinggunungslamet.my.id/',
             ],
-            'enable_payments' => ['bca_va','permata_va','bni_va','bri_va','gopay'],
+            'enable_payments' => ['bca_va', 'permata_va', 'bni_va', 'bri_va', 'gopay'],
             'vtweb' => [],
         ];
 
@@ -173,7 +170,7 @@ class BookingController extends Controller
                 'link_pembayaran' => $paymentUrl,
             ];
 
-            if($ketua_kelompok != null && $transaction != null) {
+            if ($ketua_kelompok != null && $transaction != null) {
                 // kirim email
                 Mail::to($request->email_ketua)->send(new KonfirmasiBooking($data));
                 return response()->json([
@@ -197,91 +194,98 @@ class BookingController extends Controller
                 'url' => url('/booking'),
             ]);
         }
-
-
-
-
     }
 
     public function callback(Request $request)
     {
-            //set konfigurasi midtrans
-            Config::$serverKey = config('services.midtrans.serverKey');
-            Config::$isProduction = config('services.midtrans.isProduction');
-            Config::$isSanitized = config('services.midtrans.isSanitized');
-            Config::$is3ds = config('services.midtrans.is3ds');
+        //set konfigurasi midtrans
+        Config::$serverKey = config('services.midtrans.serverKey');
+        Config::$isProduction = config('services.midtrans.isProduction');
+        Config::$isSanitized = config('services.midtrans.isSanitized');
+        Config::$is3ds = config('services.midtrans.is3ds');
 
-            //buat instance midtrans
-            $notification = new Notification();
+        //buat instance midtrans
+        $notification = new Notification();
 
-            //assign ke variable untuk memudahkan coding
+        //assign ke variable untuk memudahkan coding
 
-            $status = $notification->transaction_status;
+        $status = $notification->transaction_status;
 
 
-            $transaction = Transaction::where('kode_booking', $notification->order_id)->first();
+        $transaction = Transaction::where('kode_booking', $notification->order_id)->first();
 
-            // handler notification status midtrans
-            if ($status == "settlement") {
-                $transaction->status = 'disetujui';
-                $transaction->save();
+        // handler notification status midtrans
+        if ($status == "settlement") {
+            $transaction->status = 'disetujui';
+            $anggota = json_decode($transaction->anggota_kelompok) ?? '';
 
-                $data = [
-                    'nama_ketua' => $transaction->ketuaKelompok->nama_ketua_kelompok,
-                    'kode_booking' => $transaction->kode_booking,
-                ];
-                Mail::to($transaction->ketuaKelompok->email)->send(new SuccessBooking($data));
-                return response()->json([
-                    'meta' => [
-                        'code' => 200,
-                        'message' => 'Midtrans Payment Success'
-                    ]
-                ]);
-            } else if ($status == "pending") {
-                $transaction->status = 'pending';
-                $transaction->save();
-                return response()->json([
-                    'meta' => [
-                        'code' => 200,
-                        'message' => 'Midtrans Payment Pending'
-                    ]
-                ]);
-            } else if ($status == 'deny') {
-                $transaction->status = 'dibatalkan';
-                $transaction->save();
-                return response()->json([
-                    'meta' => [
-                        'code' => 200,
-                        'message' => 'Midtrans Payment Deny'
-                    ]
-                ]);
-            } else if ($status == 'expired') {
-                $transaction->status = 'dibatalkan';
-                $transaction->save();
-                return response()->json([
-                    'meta' => [
-                        'code' => 200,
-                        'message' => 'Midtrans Payment Expired'
-                    ]
-                ]);
-            } else if ($status == 'cancel') {
-                $transaction->status = 'dibatalkan';
-                $transaction->save();
-                return response()->json([
-                    'meta' => [
-                        'code' => 200,
-                        'message' => 'Midtrans Payment Cancel'
-                    ]
-                ]);
+            if (!empty($anggota)) {
+                $jumlah_anggota = count($anggota) + 1;
             } else {
-                $transaction->status = 'dibatalkan';
-                $transaction->save();
-                return response()->json([
-                    'meta' => [
-                        'code' => 500,
-                        'message' => 'Midtrans Payment Gagal'
-                    ]
-                ]);
+                $jumlah_anggota = 1;
             }
+
+            $kuotaGunung = KuotaGunung::where(['tanggal' => $transaction->tanggal_berangkat , 'site_id' => $transaction->site->id])->first();
+            $kuotaGunung->kuota = $kuotaGunung->kuota - $jumlah_anggota;
+            $kuotaGunung->save();
+            $transaction->save();
+
+            $data = [
+                'nama_ketua' => $transaction->ketuaKelompok->nama_ketua_kelompok,
+                'kode_booking' => $transaction->kode_booking,
+            ];
+            Mail::to($transaction->ketuaKelompok->email)->send(new SuccessBooking($data));
+            return response()->json([
+                'meta' => [
+                    'code' => 200,
+                    'message' => 'Midtrans Payment Success'
+                ]
+            ]);
+        } else if ($status == "pending") {
+            $transaction->status = 'pending';
+            $transaction->save();
+            return response()->json([
+                'meta' => [
+                    'code' => 200,
+                    'message' => 'Midtrans Payment Pending'
+                ]
+            ]);
+        } else if ($status == 'deny') {
+            $transaction->status = 'dibatalkan';
+            $transaction->save();
+            return response()->json([
+                'meta' => [
+                    'code' => 200,
+                    'message' => 'Midtrans Payment Deny'
+                ]
+            ]);
+        } else if ($status == 'expired') {
+            $transaction->status = 'dibatalkan';
+            $transaction->save();
+            return response()->json([
+                'meta' => [
+                    'code' => 200,
+                    'message' => 'Midtrans Payment Expired'
+                ]
+            ]);
+        } else if ($status == 'cancel') {
+            $transaction->status = 'dibatalkan';
+            $transaction->save();
+            return response()->json([
+                'meta' => [
+                    'code' => 200,
+                    'message' => 'Midtrans Payment Cancel'
+                ]
+            ]);
+        } else {
+            $transaction->status = 'dibatalkan';
+            $transaction->save();
+            return response()->json([
+                'meta' => [
+                    'code' => 500,
+                    'message' => 'Midtrans Payment Gagal'
+                ]
+            ]);
+        }
     }
 }

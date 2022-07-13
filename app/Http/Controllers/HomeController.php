@@ -32,9 +32,12 @@ class HomeController extends Controller
 
         $transaction = Transaction::where('kode_booking', $request->kode_booking)->firstOrFail();
 
-        $anggota = json_decode($transaction->anggota_kelompok);
-
+        $anggota = json_decode($transaction->anggota_kelompok) ?? '';
+        if(!empty($anggota)) {
         $jumlah_anggota = count($anggota) + 1;
+        } else {
+        $jumlah_anggota = 1;
+        }
         return view('check-status-booking', compact('transaction','jumlah_anggota'));
     }
 

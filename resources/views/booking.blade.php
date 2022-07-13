@@ -15,6 +15,7 @@
             <div class="col-xl-12">
                 <form id="form-kuota" action="{{ route('booking.kuota') }}" method="post">
                     @csrf
+                    @if (!$periods->isEmpty())
                     <div class="row">
                         <div class="col-xl-6 mb-4">
                             <select class="form-select wide" id="bulan_tahun" name="bulan_tahun">
@@ -38,6 +39,7 @@
                             </select>
                         </div>
                     </div>
+                    @endif
                 </form>
             </div>
         </div>

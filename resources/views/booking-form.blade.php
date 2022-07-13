@@ -196,7 +196,7 @@
                             </thead>
                             <tbody>
                                 <td>WISATAWAN</td>
-                                <td>Rp50,000</td>
+                                <td>Rp{{ number_format($harga) }}</td>
                             </tbody>
                         </table>
                     </div>
