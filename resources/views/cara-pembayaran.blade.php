@@ -72,18 +72,18 @@
                     </ol> --}}
                     <ol type="1">
                         <li>Buka browser dengan alamat url <a href="https://booking-gunungslamet.my.id/">https://booking-gunungslamet.my.id</a></li><br>
-                             <img src="https://snipboard.io/UCzkN4.jpg" style="width: 90%; margin-bottom: 40px;">
+                             <img src="https://snipboard.io/KtUzDj.jpg" style="width: 90%; margin-bottom: 40px;">
 
                                      <hr>
 
                          <li>Memilih Rute Yang Ingin Di Tuju</li><br>
-                             <img src="https://snipboard.io/eC5DtR.jpg" style="width: 90%; margin-bottom: 40px;"><br>
+                             <img src="https://snipboard.io/rQd87V.jpg" style="width: 90%; margin-bottom: 40px;"><br>
                                      <hr>
                          <li>Melengkapi Data Ketua Kelompok</li><br>
-                             <img src="https://snipboard.io/O5ZbJC.jpg" style="width: 90%; margin-bottom: 40px;"><br>
+                             <img src="https://snipboard.io/8CgflX.jpg" style="width: 90%; margin-bottom: 40px;"><br>
                                      <hr>
                          <li>Lengkapi Data Jumlah Anggota </li><br>
-                             <img src="https://snipboard.io/qwHUMQ.jpg" style="width: 90%; margin-bottom: 40px;"><br>
+                             <img src="https://snipboard.io/5ZxAfR.jpg" style="width: 90%; margin-bottom: 40px;"><br>
                                      <hr>
                          <li>Melakukan Pembayaran Menggunakan BCA, BNI, BRI, Permata Virtual Account, GOPAY,</li><br>
                           <img src="https://snipboard.io/osdmwc.jpg" style="width: 90%; margin-bottom: 40px;"><br>
@@ -93,7 +93,7 @@
                                         <hr>
 
                         <li>Selesai Silahkan Tunjukan Email Kepada Petugas Pada Saat proses Check In Ke dalam Gunung Slamet</li><br>
-                            <img src="https://snipboard.io/qcPb4K.jpg" style="width: 90%; margin-bottom: 40px;"><br>
+                            <img src="https://snipboard.io/Yq2KLe.jpg" style="width: 90%; margin-bottom: 40px;"><br>
 
 
 

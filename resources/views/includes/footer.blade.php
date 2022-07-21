@@ -4,5 +4,5 @@
     </div>
     <strong>Copyright &copy; @php
         echo date('Y')
-    @endphp <a href="#">{{ request()->getHost() }}</a>.</strong> All rights reserved.
+    @endphp <a href="{{ url('/') }}">{{ request()->getHost() }}</a>.</strong> All rights reserved.
   </footer>

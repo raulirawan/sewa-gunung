@@ -8,4 +8,4 @@
     <link rel="stylesheet" href="{{ asset('frontend/css/gijgo.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/css/slicknav.css') }}">
-    <link rel="stylesheet" href="{{ asset('frontend/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/css/style-edit.css') }}">

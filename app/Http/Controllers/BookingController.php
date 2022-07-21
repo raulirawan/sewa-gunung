@@ -26,7 +26,7 @@ class BookingController extends Controller
         $site = Site::first();
         $periods = DB::table('kuota_gunung')
             ->select(DB::raw('YEAR(tanggal) as year, MONTH(tanggal) as month, MONTHNAME(tanggal) as month_name'))
-            ->whereMonth('tanggal', Carbon::now()->month)
+            ->whereMonth('tanggal', '>=',Carbon::now()->month)
             ->groupBy('year')
             ->groupBy('month')
             ->orderBy('year', 'asc')
@@ -56,7 +56,7 @@ class BookingController extends Controller
         $sites = Site::all();
         $periods = DB::table('kuota_gunung')
             ->select(DB::raw('YEAR(tanggal) as year, MONTH(tanggal) as month, MONTHNAME(tanggal) as month_name'))
-            ->whereMonth('tanggal', Carbon::now()->month)
+            ->whereMonth('tanggal', '>=',Carbon::now()->month)
             ->groupBy('year')
             ->groupBy('month')
             ->orderBy('year', 'asc')
