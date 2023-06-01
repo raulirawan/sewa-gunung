@@ -42,6 +42,8 @@ class TransactionController extends Controller
                         return '<span class="badge badge-warning">PENDING</span>';
                     } elseif($item->status == 'naik') {
                         return '<span class="badge badge-success">NAIK</span>';
+                    }elseif($item->status == 'turun') {
+                        return '<span class="badge badge-danger">PENDAKIAN SELESAI</span>';
                     }
                     else {
                         return '<span class="badge badge-danger">DIBATALKAN</span>';
